@@ -1,0 +1,62 @@
+.login-messages-box {
+	margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+
+.login-box {
+	width: 80%;
+	padding: 40px;
+	background: rgba(0, 0, 0, 0.5);
+	box-sizing: border-box;
+	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+	border-radius: 10px;
+	margin-top: 2rem;
+}
+
+.login-box .user-box {
+	position: relative;
+}
+
+.login-box .user-box input {
+	width: 100%;
+	padding: 10px 0;
+	font-size: 16px;
+	color: #fff;
+	margin-bottom: 30px;
+	border: none;
+	border-bottom: 1px solid #fff;
+	outline: none;
+	background: transparent;
+}
+.login-box .user-box label {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px 0;
+	font-size: 16px;
+	color: #fff;
+	pointer-events: none;
+	transition: 0.5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:active ~ label {
+	top: -20px;
+	left: 0;
+	color: #03e9f4;
+	font-size: 12px;
+}
+
+.forgot-password-btn {
+	cursor: pointer;
+}
+
+.connect-btn-box {
+    margin-top: 2rem;
+}
+
+.no-account-box {
+    /* align-self: flex-end */
+    margin-top: 2rem;
+    cursor: pointer;
+}

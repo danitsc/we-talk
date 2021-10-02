@@ -2,14 +2,18 @@ import React, { useState, useContext } from 'react'
 import request from './authRequests'
 import { Link } from 'react-router-dom'
 import socket from '../services/requests-wrapper'
+import { useHistory } from 'react-router'
 import { UserContext } from '../context/user-context'
+import { palette } from '../../theme/style'
+import './Login.css'
 
 const Login = ({ setLoggedIn }) => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [error, setError] = useState(null)
+	const [keepLoggedIn, setKeepLoggedIn] = useState(true)
 	const { LOGIN } = useContext(UserContext)
-
+	let history = useHistory()
 	const onChange = (field, value) => {
 		field === 'email' && setEmail(value)
 		field === 'password' && setPassword(value)
@@ -21,76 +25,70 @@ const Login = ({ setLoggedIn }) => {
 
 	const login = async e => {
 		e.preventDefault()
-
-		socket.emit('NEW_USER', { nickname: email }, txt => {
-			console.log('vine pana aici?', txt)
-		})
+		const email = 'lala'
 		LOGIN(email)
 		setLoggedIn(true)
-		// const data = await request({
-		// 	type: 'LOGIN',
-		// 	payload: { email, password },
-		// })
-		// if (!data.error) {
-		// 	console.log('wtf', data)
-		// 	const {
-		// 		userInfo: { nickname, token },
-		// 	} = data
-		// 	console.log('props before', props.history)
-		// 	props.history.push('/')
-		// 	console.log('props after', props.history)
-		// } else {
-		// 	setTimeout(() => setError(null), 2000)
-		// 	// setError(data.error)
-		// }
 	}
 	return (
-		<div className='d-flex h-100 w-100'>
-			<div className='container'>
-				<div className='column h-100'>
-					<div className='d-flex flex-column h-100 justify-content-center align-items-center'>
-						<form className='col-4'>
-							<div className='d-flex flex-column align-items-center m-2'>
-								<label htmlFor='Username'>Email</label>
-								<input
-									type='text'
-									className='form-control col-lg-8 col-md-12'
-									id='email'
-									placeholder='Enter your username...'
-									onChange={e => onChange('email', e.target.value)}
-								/>
+		<div
+			className='login-box container h-90 w-90 d-flex flex-column'
+			style={{ color: palette.offWhite }}
+		>
+			<div className='login-messages-box align-self-center'>
+				<h2>LOGO</h2>
+				<span>Bine ai venit !</span>
+				<span>Intra in cont</span>
+			</div>
+			<div className='d-flex flex-column'>
+				<div className='d-flex flex-column'>
+					<div class=''>
+						{/* <h2>Login</h2> */}
+						<form>
+							<div class='user-box'>
+								<input type='text' />
+								<label>Username</label>
 							</div>
-							{/* <div className='d-flex flex-column align-items-center m-2'>
-								<label htmlFor='password'>Password</label>
-								<input
-									type='text'
-									className='form-control col-lg-8 col-md-12'
-									id='password'
-									placeholder='Enter password...'
-									onChange={e => onChange('password', e.target.value)}
-								/>
-							</div> */}
-							<div className='d-flex flex-column align-items-center m-2'>
-								<button
-									// style={{ marginTop: 10, paddingLeft: 20, paddingRight: 20 }}
-									className='btn btn-success'
-									onClick={login}
-								>
-									Log In
-								</button>
-							</div>
-							<div className='d-flex flex-column align-items-center m-2'>
-								<div>
-									<Link to='/register'>
-										<span>Sign Up</span>
-									</Link>
-								</div>
+							<div class='user-box'>
+								<input type='password' />
+								<label>Password</label>
 							</div>
 						</form>
-						{error !== null && (
-							<div style={{ textAlign: 'center' }}>{error}</div>
-						)}
 					</div>
+				</div>
+				<div className='d-flex justify-content-between'>
+					<div class='custom-control custom-switch'>
+						<input
+							type='checkbox'
+							class='custom-control-input'
+							id='customSwitch1'
+							checked={keepLoggedIn}
+							onChange={e => setKeepLoggedIn(!keepLoggedIn)}
+						/>
+						<label class='custom-control-label' for='customSwitch1'>
+							Pastreaza-ma conectat
+						</label>
+					</div>
+					<div>
+						<span className='text-danger forgot-password-btn'>
+							Ai uitat parola?
+						</span>
+					</div>
+				</div>
+				<div className='d-flex justify-content-center connect-btn-box'>
+					<button className='btn btn-outline-success w-50' onClick={login}>
+						Conectare
+					</button>
+				</div>
+				<div className='d-flex justify-content-center no-account-box'>
+					<h5>
+						Nu ai cont inca?{' '}
+						<span
+							className='text-primary'
+							onClick={() => history.push('/register')}
+						>
+							Inregistreaza-te aici
+						</span>
+					</h5>
 				</div>
 			</div>
 		</div>

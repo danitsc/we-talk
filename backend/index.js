@@ -20,6 +20,12 @@ app.get('/health', (req, res) => {
 	res.send('good')
 })
 
+app.post('/login', async (req, res) => {
+	res.send({
+		message: 'Successfully logged in.'
+	})
+})
+
 app.use(bodyParser.urlencoded({ extended: false }))
 io.on('connection', socketController)
 

@@ -64,14 +64,14 @@ function App() {
 	}, [])
 	return (
 		<div className='d-flex flex-column h-100 main-container'>
-			{loggedIn && <Header showModal={showModal} setShowModal={setShowModal} />}
-			{showModal && (
-				<Modal showModal={showModal} setShowModal={setShowModal}>
-					<LoginMock />
-				</Modal>
-			)}
-			<div className='main-form-container h-100 container'>
-				<Router>
+			<Router>
+				<Header showModal={showModal} setShowModal={setShowModal} />
+				{showModal && (
+					<Modal showModal={showModal} setShowModal={setShowModal}>
+						<LoginMock />
+					</Modal>
+				)}
+				<div className='main-form-container h-100 container'>
 					<Switch>
 						<RedirectRoute
 							setLoggedIn={setLoggedIn}
@@ -101,8 +101,8 @@ function App() {
 							component={Reservations}
 						/>
 					</Switch>
-				</Router>
-			</div>
+				</div>
+			</Router>
 		</div>
 	)
 }

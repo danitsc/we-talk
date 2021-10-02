@@ -2,8 +2,22 @@ import React, { useEffect, useState, useContext } from 'react'
 import './SideBar.css'
 import { UserContext } from '../context/user-context'
 import { palette } from '../../theme/style'
+import { useHistory } from 'react-router'
 const Header = ({ showModal, setShowModal }) => {
 	const [option, setOption] = useState(1)
+	let history = useHistory()
+	useEffect(() => {
+		const pagesMapping = {
+			1: '/',
+			2: '/register-field',
+			3: '/login',
+			4: '/signup',
+		}
+
+		console.log('ce?', pagesMapping[option])
+
+		history.push(pagesMapping[option])
+	}, [option])
 	return (
 		<div
 			className='container d-flex justify-content-between header-container'
@@ -17,10 +31,30 @@ const Header = ({ showModal, setShowModal }) => {
 					className='d-flex flex-direction-row menu-container'
 					style={{ color: palette.offWhite }}
 				>
-					<li className={`${option === 1 && 'option-selected'}`} onClick={() => setOption(1)}>Fa o rezervare</li>
-					<li className={`${option === 2 && 'option-selected'}`} onClick={() => setOption(2)}>Inscrie Teren</li>
-					<li className={`${option === 3 && 'option-selected'}`} onClick={() => setOption(3)}>Login</li>
-					<li className={`${option === 4 && 'option-selected'}`} onClick={() => setOption(4)}>Sign Up</li>
+					<li
+						className={`${option === 1 && 'option-selected'}`}
+						onClick={() => setOption(1)}
+					>
+						Fa o rezervare
+					</li>
+					<li
+						className={`${option === 2 && 'option-selected'}`}
+						onClick={() => setOption(2)}
+					>
+						Inscrie Teren
+					</li>
+					<li
+						className={`${option === 3 && 'option-selected'}`}
+						onClick={() => setOption(3)}
+					>
+						Login
+					</li>
+					<li
+						className={`${option === 4 && 'option-selected'}`}
+						onClick={() => setOption(4)}
+					>
+						Sign Up
+					</li>
 				</ul>
 			</div>
 		</div>
